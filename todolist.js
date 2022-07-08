@@ -22,11 +22,11 @@ function createDiv(type){
     taskDiv.className="taskDiv";
     taskDiv.innerHTML="<p id='removeActive'><input type='checkbox' id='check"+count+"' onchange='checkStatus("+count+")'> Active<p>Title: <input type='text' id='title"+count+"' value="+title+"></p><p>Desc: <input type='text' id='desc"+count+"' value="+desc+"></p><p>Date: <input type='text' id='date"+count+"' value="+date+"> </p>";
     taskDiv.innerHTML+=`<button onclick='removeDiv("${divId}")' class='btn-remove'>Remove</button>` ;
-    
     if(type=='active')
     {
         document.querySelector("#activeList").appendChild(taskDiv);
-        setData();
+        document.querySelector("#removeActive").style.display="none";
+      setData();
     }
     else{
         document.querySelector("#pendingList").appendChild(taskDiv);
@@ -49,13 +49,15 @@ function setData(){
 }
 function checkStatus(id){
     var status=document.querySelector("#check"+id).checked;
+
     if(status)
     {
         createDiv('active');
-      removeDiv('pending_'+id);
-      document.querySelector("#removeActive").innerHTML="";
+        removeDiv('pending_'+id);
     }
-    else{
+    else
+    {
         document.querySelector("#taskDiv"+id).style.backgroundColor="white";
     }
+    
 }
